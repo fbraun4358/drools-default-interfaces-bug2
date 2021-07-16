@@ -1,8 +1,11 @@
 package com.example;
 
+import static org.junit.Assert.*;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 import org.drools.modelcompiler.ExecutableModelProject;
 import org.junit.After;
@@ -67,6 +70,9 @@ public class ExecutableModelWithUpdateFromCollectTests {
 		session.startProcess(PROCESS_ID);
 		
 		session.fireAllRules();
+
+		assertEquals(4, c.getValues().size());
+		assertTrue(c.getValues().containsAll(Arrays.asList("not in memory", "one", "two", "three")));
 	}
 	
 	@Test
@@ -89,5 +95,8 @@ public class ExecutableModelWithUpdateFromCollectTests {
 		session.startProcess(PROCESS_ID);
 		
 		session.fireAllRules();
+		
+		assertEquals(4, c.getValues().size());
+		assertTrue(c.getValues().containsAll(Arrays.asList("not in memory", "one", "two", "three")));
 	}
 }
