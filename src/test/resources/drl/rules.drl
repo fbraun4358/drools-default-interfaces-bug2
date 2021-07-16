@@ -5,7 +5,7 @@ import java.util.Arrays
 
 import com.example.ClassWithValues
 
-rule "Rules that breaks serialization"
+rule "Rule that breaks ExecutableModel"
 ruleflow-group "RFG-1"
     when
     	$cwvs: List(size > 0) from collect (ClassWithValues(values.size == 0))
