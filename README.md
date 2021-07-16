@@ -1,2 +1,2 @@
-# drools-serialization-bug-2
-Example of OR and eval() expression casuing NPE
+# drools-executable-model-bug
+Example of the executable model not compiling when updating objects ina for loop from a collected list.
