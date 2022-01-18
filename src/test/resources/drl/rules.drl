@@ -3,19 +3,33 @@ package com.example.rules
 import java.util.List
 import java.util.Arrays
 
-import com.example.ClassWithValues
+import com.example.Values
 
-rule "Rule that breaks ExecutableModel"
+rule "First Rule"
 ruleflow-group "RFG-1"
     when
-    	$cwvs: List(size > 0) from collect (ClassWithValues(values.size == 0))
-    	$values: List(size > 0) from collect (String())
+    	$v: Values()
     then
     	
-    	for(ClassWithValues cwv: (List<ClassWithValues>)$cwvs){
-    		cwv.add("not in memory");
-    		((List<String>)$values).forEach(cwv::add);
-    		
-    		update(cwv);
-    	}
+    	System.out.println($v);
+end
+
+
+rule "Left Rule"
+ruleflow-group "RFG-2"
+    when
+    	$v: Values( this == Values.LEFT )
+    then
+    	
+    	System.out.println("Left Rule Fired");
+end
+
+
+rule "Right Rule"
+ruleflow-group "RFG-3"
+    when
+    	$v: Values( this == Values.RIGHT )
+    then
+    	
+    	System.out.println("Right Rule Fired");
 end

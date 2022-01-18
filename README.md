@@ -1,2 +1,2 @@
-# drools-executable-model-bug
-Example of the executable model not compiling when updating objects ina for loop from a collected list.
+# drools-xor-split-bug
+Having an XOR split using the executable model does not work while it does work in the old model.
