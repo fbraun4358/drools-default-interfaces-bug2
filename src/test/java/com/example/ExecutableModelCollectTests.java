@@ -1,5 +1,10 @@
 package com.example;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,11 +24,13 @@ import org.kie.api.builder.Message.Level;
 import org.kie.api.io.Resource;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.slf4j.Logger;
 
-public class ExecutableModelXORSplitTests {
+public class ExecutableModelCollectTests {
 
 	private static final String PROCESS_ID = "example";
 	
+	//Use Executable Model?
 	public static Stream<Arguments> data(){
 		return Stream.of(
 				Arguments.of(true),
@@ -32,30 +39,23 @@ public class ExecutableModelXORSplitTests {
 	
 	@ParameterizedTest
 	@MethodSource("data")
-	public void withExecutableModel_Left(boolean executable) throws IOException, ClassNotFoundException {
+	public void withExecutableModel_CollectTest(boolean executable) throws IOException, ClassNotFoundException {
 		
 		KieBase kbase = loadRules(executable);
 		KieSession session = kbase.newKieSession();
 		
-		session.insert(Values.LEFT);
+		Logger logger = mock(Logger.class);
+		
+		session.insert("String1");
+		session.insert("String2");
+		session.insert(logger);
 		
 		session.startProcess(PROCESS_ID);
 		
 		session.fireAllRules();
-	}
-	
-	@ParameterizedTest
-	@MethodSource("data")
-	public void withExecutableModel_Right(boolean executable) throws IOException, ClassNotFoundException {
 		
-		KieBase kbase = loadRules(executable);
-		KieSession session = kbase.newKieSession();
-		
-		session.insert(Values.RIGHT);
-		
-		session.startProcess(PROCESS_ID);
-		
-		session.fireAllRules();
+		verify(logger, times(1))
+			.debug(eq("PASSED"));
 	}
 	
 	private static KieBase loadRules(boolean useExecutable) throws IOException {

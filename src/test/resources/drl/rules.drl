@@ -1,35 +1,18 @@
 package com.example.rules
 
-import java.util.List
+import java.util.Set
 import java.util.Arrays
 
 import com.example.Values
 
+import org.slf4j.Logger
+
 rule "First Rule"
 ruleflow-group "RFG-1"
     when
-    	$v: Values()
+    	exists		Set (size > 1) from accumulate ( $s: String(),
+											     collectSet($s))
+		$l: Logger()
     then
-    	
-    	System.out.println($v);
-end
-
-
-rule "Left Rule"
-ruleflow-group "RFG-2"
-    when
-    	$v: Values( this == Values.LEFT )
-    then
-    	
-    	System.out.println("Left Rule Fired");
-end
-
-
-rule "Right Rule"
-ruleflow-group "RFG-3"
-    when
-    	$v: Values( this == Values.RIGHT )
-    then
-    	
-    	System.out.println("Right Rule Fired");
+    	$l.debug("PASSED");
 end

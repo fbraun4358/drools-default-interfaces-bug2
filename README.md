@@ -1,2 +1,2 @@
-# drools-xor-split-bug
-Having an XOR split using the executable model does not work while it does work in the old model.
+# drools-collect-bug
+Using exists with accumulate doesn't work in new executable model.  It does work in old model.
