@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sample</groupId>
-	<artifactId>drools-default-interfaces-bug</artifactId>
+	<artifactId>drools-collect-bug</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
@@ -12,7 +12,7 @@
 		<maven.compiler.target>${java.target}</maven.compiler.target>
 		<maven.compiler.source>${java.source}</maven.compiler.source>
 
-		<drools.version>7.69.0.Final</drools.version>
+		<drools.version>7.73.0.Final</drools.version>
 		<assertj.version>3.16.1</assertj.version>
 		<junit.version>4.13</junit.version>
 	</properties>
