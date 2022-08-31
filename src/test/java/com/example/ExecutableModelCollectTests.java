@@ -1,9 +1,7 @@
 package com.example;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -39,23 +37,26 @@ public class ExecutableModelCollectTests {
 	
 	@ParameterizedTest
 	@MethodSource("data")
-	public void withExecutableModel_CollectTest(boolean executable) throws IOException, ClassNotFoundException {
+	public void withExecutableModel(boolean executable) throws IOException, ClassNotFoundException {
 		
 		KieBase kbase = loadRules(executable);
 		KieSession session = kbase.newKieSession();
 		
 		Logger logger = mock(Logger.class);
-		
-		session.insert("String1");
-		session.insert("String2");
+
+		session.insert(new ClassWithValue(null));
+		session.insert(new ClassWithValue(new Object()));
 		session.insert(logger);
 		
 		session.startProcess(PROCESS_ID);
 		
 		session.fireAllRules();
 		
-		verify(logger, times(1))
-			.debug(eq("PASSED"));
+		verify(logger, times(2))
+				.info(any());
+		
+		verify(logger, times(2))
+				.debug(any());
 	}
 	
 	private static KieBase loadRules(boolean useExecutable) throws IOException {
@@ -95,7 +96,7 @@ public class ExecutableModelCollectTests {
 		KieContainer container = services.newKieContainer(
 				services.getRepository().getDefaultReleaseId());
 		
-		return container.getKieBase();
+	    return container.getKieBase();
 	}
 	
 	private static String prettyBuildMessage(Message msg) {

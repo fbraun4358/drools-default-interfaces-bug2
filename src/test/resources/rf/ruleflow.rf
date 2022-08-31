@@ -11,9 +11,9 @@
   </header>
 
   <nodes>
-    <end id="115" name="End" x="156" y="444" width="123" height="44" />
-    <start id="53" name="Start" x="156" y="24" width="123" height="44" />
-    <ruleSet id="245" name="RFG-1" x="122" y="254" width="121" height="48" ruleFlowGroup="RFG-1" />
+    <end id="115" name="End" x="132" y="264" width="123" height="44" />
+    <start id="53" name="Start" x="132" y="48" width="123" height="44" />
+    <ruleSet id="245" name="RFG-1" x="96" y="120" width="121" height="48" ruleFlowGroup="RFG-1" />
   </nodes>
 
   <connections>
