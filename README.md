@@ -1,2 +1,2 @@
-# drools-collect-bug
-Using exists with accumulate doesn't work in new executable model.  It does work in old model.
+# drools-default-interfaces-bug2
+When a class has a property which is implemented via a default implementation in an interface, that property is not reacted upon when updates occur.
